@@ -1,12 +1,10 @@
 import { useAtom } from 'jotai';
 import { a_gob_players, a_my_pix, a_opp_alert, a_paused, a_reset_stats, a_secs, a_size, a_spectator } from './atoms';
 import { _11, SIZES } from './const';
-import { RA_PLAYER_TICK } from './logic';
 import PromptPanel from './Prompt Panel';
 import useGameState from './useGameState';
 import useLang, { S_RESUME, S_START } from './useLang';
 import usePlaySound from './usePlaySound';
-import { runeAction } from './utils';
 
 const StartPrompt = () => {
     const playSound = usePlaySound();
@@ -40,7 +38,6 @@ const StartPrompt = () => {
         setPaused(false);
 
         if (secs === 0) {
-            runeAction(RA_PLAYER_TICK, { player: myPix, secs: -1 });
             playSound('dice');
         }
     };

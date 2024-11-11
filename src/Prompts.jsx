@@ -3,7 +3,6 @@ import _ from 'lodash';
 import PromptPanel from './Prompt Panel';
 import { a_alert, a_gob_players, a_my_pix, a_over, a_paused, a_gob_points, a_reset_stats, a_size, a_solo, a_solo_stats, a_spectator } from './atoms';
 import { X } from './const';
-import { RA_SET_STATS } from './logic';
 import useGameState from './useGameState';
 import useLang, { S_BEST_SCORE, S_PLAY_AGAIN, S_RESET_STATS, S_WAITING_FOR_START } from './useLang';
 import usePersistedData from './usePersistedData';

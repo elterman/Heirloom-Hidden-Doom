@@ -51,7 +51,7 @@ export const a_best_points = atom(get => {
     return plays > 1 && get(a_points) === best_points;
 });
 
-export const a_solo_stats = atom({ plays: 0, total_points: 0, best_points: 0 })
+export const a_solo_stats = atom({ plays: 0, total_points: 0, best_points: 0 });
 
 export const a_paused = atom(
     get => {

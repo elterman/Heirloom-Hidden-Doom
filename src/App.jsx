@@ -33,7 +33,7 @@ const App = () => {
         defer(() => {
             setStarting(false);
             defer(() => setSplash(false), 300);
-        }, 0);
+        }, 2000);
     }
 
     const gridArea = _11;

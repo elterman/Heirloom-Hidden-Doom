@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 import { a_alert, a_gob, a_my_pix, a_over, a_page, a_paused, a_points, a_secs, a_size, a_solo, a_spectator, a_step, a_tick_time, a_tile_sets } from './atoms';
 import { DRAW, LOST, P1_WON, P2_WON, SECS, START_PAGE, WON } from './const';
-import { RA_PLAYER_TICK, RA_SET_POINTS, RA_SET_STATS, RA_SIZE_SET } from './logic';
 import { S_BOTH_DEAD, S_ITS_DRAW, S_P1_WON, S_P2_WON, S_YOU_LOST, S_YOU_WON } from './useLang';
 import usePlaySound from './usePlaySound';
 import { defer, getWinner, retile, runeAction } from './utils';

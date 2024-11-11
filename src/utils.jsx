@@ -68,12 +68,6 @@ export const clientRect = obid => {
 
 export const defer = (fn, ms = 1) => _.delay(fn, ms);
 
-export const runeAction = (action, arg) => {
-    // console.log({ action, arg });
-    // eslint-disable-next-line no-undef
-    Rune.actions[action](arg);
-};
-
 export const stateKey = ({ size }) => `${size}`;
 
 const shuffle = (size, coinIndex = null) => {
