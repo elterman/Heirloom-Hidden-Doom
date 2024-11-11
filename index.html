@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preload" href="/src/Images/BMG.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/src/Images/Pattern.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/src/Images/Title.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/src/Images/Play.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/src/Images/Watch.webp" as="image" type="image/webp" />
+  <link rel="preload" href="/src/Fonts/CinzelDecorative.ttf" as="font" type="font/ttf" crossorigin />
+  <link rel="preload" href="/src/Fonts/RobotoCondensed.ttf" as="font" type="font/ttf" crossorigin />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+  <title>Heirloom Hidden Doom</title>
+</head>
+
+<body id="body" class="body">
+  <div class="wrapper">
+    <div id="root" style="position: relative; overflow: hidden; height: 100%"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <script>
+      if (typeof navigator.serviceWorker !== "undefined") {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </div>
+</body>
+
+</html>
