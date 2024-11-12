@@ -43,11 +43,11 @@ const Tile = (props) => {
 
     const processClick = () => {
         setTap(null);
+        setSelected({ row, col });
 
         if (!item) {
             const nextStep = step === TILE_SET_SIZE ? 1 : step + 1;
             setStep(nextStep);
-            setSelected({ row, col });
 
             return;
         }

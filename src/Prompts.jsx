@@ -55,14 +55,12 @@ const Prompts = () => {
 
     const alertButtonStyle = { pointerEvents: 'none', filter: 'saturate(2)' };
     const overPrompt = getOverPrompt();
-    const showBestScore = over && stats.best_points > 10 && points >= stats.best_points && !alert;
 
     return <>
         <PromptPanel id='pp-over' labels={[overPrompt]} delay={overPrompt ? 0.5 : 0} onClick={onResponse} show={overPrompt}/>
         <PromptPanel id='pp-reset-stats' labels={[str(S_RESET_STATS), X]} onClick={onResponse} show={resetStats} />
         <PromptPanel id='pp-alert' labels={[str(alert)]} show={!!alert} buttonStyle={alertButtonStyle} />
         <PromptPanel id='pp-no-size' labels={[str(S_WAITING_FOR_START)]} show={!size} buttonStyle={{ pointerEvents: 'none', filter: 'sepia(1)' }} />
-        <PromptPanel id='pp-best_score' labels={[str(S_BEST_SCORE)]} show={showBestScore} buttonStyle={alertButtonStyle} />
     </>;
 };
 
