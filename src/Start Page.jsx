@@ -51,7 +51,7 @@ const StartPage = () => {
     const style = { filter: 'saturate(1.5)' };
 
     return <motion.div className='start-page' animate={{ opacity: 1 }}>
-        <img src={Title} alt='' width='85%' style={{ placeSelf: 'center' }} />
+        <img className='title' src={Title} alt='' />
         <Help />
         <AnimatedButton img={Play} width={80} onClick={onPlay} style={style} />
         <Preloader page={START_PAGE} />

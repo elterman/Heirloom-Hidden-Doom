@@ -74,7 +74,9 @@ const App = () => {
             return null;
         }
 
-        return <div style={{ gridArea, display: 'grid', overflow: 'hidden' }}>
+        const height = `min(100%, ${page === START_PAGE ? 800 : 750}px)`;
+
+        return <div className='app-content' style={{ height }}>
             {page === START_PAGE ? <StartPage /> : null}
             {page === GAME_PAGE ? <GamePage /> : null}
         </div>;
