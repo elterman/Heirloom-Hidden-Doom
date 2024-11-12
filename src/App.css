@@ -199,15 +199,6 @@
     border-radius: 50%;
 }
 
-.player {
-    place-self: start center;
-    display: grid;
-    justify-items: center;
-    gap: 10px;
-    /* filter: sepia(0.7); */
-    cursor: pointer;
-}
-
 .player-name {
     grid-area: 2/1;
     font-family: Roboto Condensed;
