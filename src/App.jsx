@@ -18,6 +18,7 @@ const App = () => {
     const [page] = useAtom(a_page);
     const [language, setLanguage] = useAtom(a_lang);
     const [, setAppState] = useAtom(a_app_state);
+    const [splashBackground, setSplashBackground] = useState('#8A0000');
 
     useEffect(() => {
         if (language) {
@@ -51,14 +52,20 @@ const App = () => {
         }, 2000);
     }
 
+    const onClick = () => {
+        localStorage.clear();
+        setSplashBackground('#500000');
+    };
+
     const gridArea = _11;
 
     const renderContent = () => {
         const bmgWidth = Math.min(300, Math.min(wx, wy) * 0.6);
+        const splashBgImg = `radial-gradient(transparent, black ${100}%)`;
 
         if (splash) {
-            return <motion.div className="splash" style={{ height: wy, width: wx }}
-                animate={{ background: '#8A0000', opacity: starting ? 1 : 0 }}>
+            return <motion.div className="splash" style={{ height: wy, width: wx }} onClick={onClick}
+                animate={{ background: splashBackground, backgroundImage: splashBgImg, opacity: starting ? 1 : 0 }}>
                 <img src={BMG} alt="BMG" width={bmgWidth} />
             </motion.div>;
         }
