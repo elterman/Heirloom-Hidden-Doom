@@ -1,5 +1,6 @@
 import { atom } from 'jotai';
-import { MIN_GAME_DIMENSION, START_PAGE } from './const';
+import _ from 'lodash';
+import { APP_STATE, MIN_GAME_DIMENSION, START_PAGE } from './const';
 import { defer } from './utils';
 
 export const a_lang = atom(null);
@@ -19,6 +20,47 @@ const a_page_base = atom(START_PAGE);
 const a_reset_stats_base = atom(false);
 const a_alert_base = atom(null);
 const a_paused_base = atom();
+
+const a_app_state_base = atom({ states: {} });
+
+export const a_app_state = atom(
+    get => {
+        const state = get(a_app_state_base);
+        return state;
+    },
+
+    (get, set, appState) => {
+        set(a_app_state_base, appState);
+
+        const json = JSON.stringify(appState, ['1', '2', '3', '4', '5', 'sounds', 'states', 'stats', 'plays', 'total_points', 'best_points']);
+
+        localStorage.setItem(APP_STATE, json);
+    }
+);
+
+export const a_state = atom(
+    get => {
+        const appState = get(a_app_state);
+        const key = get(a_size);
+        const state = _.get(appState?.states, key, {});
+        return state;
+    },
+
+    (get, set, state) => {
+        const appState = get(a_app_state);
+        const key = get(a_size);
+        _.set(appState.states, key, state);
+        set(a_app_state, { ...appState });
+    }
+);
+
+export const a_sounds = atom(
+    get => {
+        const on = get(a_app_state).sounds;
+        return on !== false;
+    },
+    (get, set, sounds) => set(a_app_state, { ...get(a_app_state), sounds })
+);
 
 export const a_alert = atom(
     get => get(a_alert_base),
@@ -52,19 +94,9 @@ export const a_best_points = atom(get => {
     return plays > 1 && get(a_points) === best_points;
 });
 
-const a_stats_base = atom([null, null, null, null, null]);
-
 export const a_stats = atom(
-    get => {
-        const size = get(a_size);
-        return get(a_stats_base)[size] || { plays: 0, total_points: 0, best_points: 0 };
-    },
-    (get, set, stats) => {
-        const size = get(a_size);
-        const newStats = [...get(a_stats_base)];
-        newStats[size] = stats;
-        set(a_stats_base, newStats);
-    }
+    get => get(a_state).stats || { plays: 0, total_points: 0, best_points: 0 },
+    (get, set, stats) => set(a_state, { ...get(a_state), stats })
 );
 
 export const a_paused = atom(

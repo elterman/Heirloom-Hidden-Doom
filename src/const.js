@@ -1,3 +1,4 @@
+export const APP_STATE = 'HHD V1';
 export const X = '✖';
 export const BULLET = '•';
 export const _11 = '1/1';

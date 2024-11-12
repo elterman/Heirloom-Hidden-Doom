@@ -68,8 +68,6 @@ export const clientRect = obid => {
 
 export const defer = (fn, ms = 1) => _.delay(fn, ms);
 
-export const stateKey = ({ size }) => `${size}`;
-
 const shuffle = (size, coinIndex = null) => {
     const dim = size + MIN_GAME_DIMENSION - 1;
     const tileCount = dim * dim;

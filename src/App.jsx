@@ -3,8 +3,8 @@ import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 import { appBackground } from './App Background.jsx';
 import './App.css';
-import { a_lang, a_page } from './atoms';
-import { _11, GAME_PAGE, START_PAGE } from './const.js';
+import { a_app_state, a_lang, a_page } from './atoms';
+import { _11, APP_STATE, GAME_PAGE, START_PAGE } from './const.js';
 import GamePage from './Game Page.jsx';
 import BMG from './Images/BMG.webp';
 import Preloader from './Preloader.jsx';
@@ -17,6 +17,7 @@ const App = () => {
     const [splash, setSplash] = useState(true);
     const [page] = useAtom(a_page);
     const [language, setLanguage] = useAtom(a_lang);
+    const [, setAppState] = useAtom(a_app_state);
 
     useEffect(() => {
         if (language) {
@@ -30,7 +31,21 @@ const App = () => {
     const { x: wx, y: wy } = windowSize();
 
     if (starting) {
+        const loadAppState = () => {
+            let json = localStorage.getItem(APP_STATE);
+            let appState = JSON.parse(json);
+
+            if (appState) {
+                return appState;
+            }
+
+            return { states: {} };
+        };
+
         defer(() => {
+            const appState = loadAppState();
+            setAppState(appState);
+
             setStarting(false);
             defer(() => setSplash(false), 300);
         }, 2000);
