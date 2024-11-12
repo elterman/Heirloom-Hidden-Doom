@@ -204,7 +204,7 @@
     display: grid;
     justify-items: center;
     gap: 10px;
-    filter: sepia(0.7);
+    /* filter: sepia(0.7); */
     cursor: pointer;
 }
 
