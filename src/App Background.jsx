@@ -7,5 +7,5 @@ const appBackgroundGradient = (props = {}) => {
 
 export const appBackground = (props = {}) => {
     const { sz = 400 } = props;
-    return { image: `url(${Pattern})`, size: `${sz}px ${sz}px`, opacity: 0.25, gradient: appBackgroundGradient() };
+    return { image: `url(${Pattern})`, size: `${sz}px ${sz}px`, opacity: 0.15, gradient: appBackgroundGradient() };
 };
