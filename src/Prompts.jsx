@@ -1,17 +1,15 @@
 import { useAtom } from 'jotai';
 import PromptPanel from './Prompt Panel';
-import { a_alert, a_over, a_paused, a_points, a_reset_stats, a_size, a_stats } from './atoms';
+import { a_alert, a_over, a_paused, a_reset_stats, a_size, a_stats } from './atoms';
 import { X } from './const';
 import useGameState from './useGameState';
-import useLang, { S_BEST_SCORE, S_PLAY_AGAIN, S_RESET_STATS, S_WAITING_FOR_START } from './useLang';
+import useLang, { S_PLAY_AGAIN, S_RESET_STATS, S_WAITING_FOR_START } from './useLang';
 import usePlaySound from './usePlaySound';
 import { defer } from './utils';
 
 const Prompts = () => {
     const [size] = useAtom(a_size);
     const [resetStats, setResetStats] = useAtom(a_reset_stats);
-    const [stats] = useAtom(a_stats);
-    const [points] = useAtom(a_points);
     const [alert] = useAtom(a_alert);
     const [over, setOver] = useAtom(a_over);
     const [, setPaused] = useAtom(a_paused);
