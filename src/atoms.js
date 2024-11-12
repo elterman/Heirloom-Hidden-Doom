@@ -13,6 +13,7 @@ export const a_over = atom(false);
 export const a_tile_sets = atom([]);
 export const a_tap = atom(null);
 export const a_tick_time = atom(null);
+export const a_selected = atom(null);
 
 const a_page_base = atom(START_PAGE);
 const a_reset_stats_base = atom(false);
@@ -51,7 +52,20 @@ export const a_best_points = atom(get => {
     return plays > 1 && get(a_points) === best_points;
 });
 
-export const a_solo_stats = atom({ plays: 0, total_points: 0, best_points: 0 });
+const a_solo_stats_base = atom([null, null, null, null, null]);
+
+export const a_solo_stats = atom(
+    get => {
+        const size = get(a_size);
+        return get(a_solo_stats_base)[size] || { plays: 0, total_points: 0, best_points: 0 };
+    },
+    (get, set, stats) => {
+        const size = get(a_size);
+        const newStats = [...get(a_solo_stats_base)];
+        newStats[size] = stats;
+        set(a_solo_stats_base, newStats);
+    }
+);
 
 export const a_paused = atom(
     get => {
