@@ -42,11 +42,10 @@ const App = () => {
         const bmgWidth = Math.min(300, Math.min(wx, wy) * 0.6);
 
         if (splash) {
-            return <div style={{ gridArea }}>
-                <motion.div className="splash" animate={{ opacity: starting ? 1 : 0 }}>
-                    <img src={BMG} alt="BMG" width={bmgWidth} />
-                </motion.div>
-            </div>;
+            return <motion.div className="splash" style={{ height: wy, width: wx }}
+                animate={{ background: '#8A0000', opacity: starting ? 1 : 0 }}>
+                <img src={BMG} alt="BMG" width={bmgWidth} />
+            </motion.div>;
         }
 
         if (starting) {

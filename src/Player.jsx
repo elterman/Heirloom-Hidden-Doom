@@ -1,5 +1,7 @@
 import Avatar from './Images/Avatar.webp';
 import Coin from './Images/Coin.webp';
+import Flag from './Images/Flag.webp';
+import Trap from './Images/Death.webp';
 import { _11 } from './const';
 
 const Player = ({ player, style }) => {
@@ -11,10 +13,10 @@ const Player = ({ player, style }) => {
     }
 
     const renderAvatar = () => {
-        const width = 55;
+        const width = 90;
 
         return <div className='avatar'>
-            <img src={src} alt='avatar' width={width} style={{ gridArea, zIndex: 1 }} />
+            <img src={Coin} alt='avatar' width={width} style={{ gridArea, zIndex: 1 }} />
         </div>;
     };
 

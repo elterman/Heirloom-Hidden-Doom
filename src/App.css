@@ -29,7 +29,8 @@
     width: 100vw;
     height: 100vh;
     background: #8A0000;
-    background-image: radial-gradient(transparent, #000 150%);
+    /* background-image: radial-gradient(transparent, #000 150%); */
+    z-index: 1;
 }
 
 .dummy {
@@ -202,7 +203,6 @@
     place-self: start center;
     display: grid;
     justify-items: center;
-    width: 65px;
     gap: 10px;
     filter: sepia(0.7);
     cursor: pointer;

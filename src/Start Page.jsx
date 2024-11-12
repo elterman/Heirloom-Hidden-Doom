@@ -1,16 +1,14 @@
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import { useEffect, useState } from 'react';
-import { a_board_size, a_online, a_over, a_page, a_paused, a_size } from './atoms';
+import { a_board_size, a_over, a_page, a_paused, a_size } from './atoms';
 import { DEFAULT_GAME_SIZE, GAME_PAGE, START_PAGE } from './const';
 import Help from './Help';
 import Play from './Images/Play.webp';
 import Title from './Images/Title.webp';
 import Preloader from './Preloader';
-import PromptPanel from './Prompt Panel';
 import { useForceUpdate } from './useForceUpdate';
 import useGameState from './useGameState';
-import useLang, { S_OFFLINE } from './useLang';
 import usePlaySound from './usePlaySound';
 import { windowSize } from './utils';
 
@@ -21,8 +19,6 @@ const StartPage = () => {
     const [size] = useAtom(a_size);
     const { onSizeSet } = useGameState();
     const [over] = useAtom(a_over);
-    const [online] = useAtom(a_online);
-    const { str } = useLang();
     const [, setPaused] = useAtom(a_paused);
 
     const { y: wy, x: wx } = windowSize();
@@ -53,14 +49,11 @@ const StartPage = () => {
     };
 
     const style = { filter: 'saturate(1.5)' };
-    const promptButtonStyle = { pointerEvents: 'none', filter: 'saturate(2)' };
 
     return <motion.div className='start-page' animate={{ opacity: 1 }}>
         <img src={Title} alt='' width='85%' style={{ placeSelf: 'center' }} />
         <Help />
-        {online && <AnimatedButton img={Play} width={80} onClick={onPlay} style={style} />}
-        {!online && <PromptPanel id='pp-offline' labels={[str(S_OFFLINE)]} show={!online} style={{ gridArea: 'unset' }}
-            buttonStyle={promptButtonStyle} />}
+        <AnimatedButton img={Play} width={80} onClick={onPlay} style={style} />
         <Preloader page={START_PAGE} />
     </motion.div>;
 };
