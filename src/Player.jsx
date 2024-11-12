@@ -1,19 +1,13 @@
-import { useAtom } from 'jotai';
 import Avatar from './Images/Avatar.webp';
 import Coin from './Images/Coin.webp';
-import { a_solo } from './atoms';
 import { _11 } from './const';
 
 const Player = ({ player, style }) => {
-    const [solo] = useAtom(a_solo);
-
     const gridArea = _11;
     let src = Avatar;
 
-    if (solo) {
-        if (player === 1) {
-            src = Coin;
-        }
+    if (player === 1) {
+        src = Coin;
     }
 
     const renderAvatar = () => {

@@ -1,12 +1,12 @@
 import { useAtom } from 'jotai';
-import { a_solo_stats } from './atoms';
+import { a_stats } from './atoms';
 import useLang, { S_AVE, S_BEST, S_PLAYS } from './useLang';
 
 const StatsPanel = () => {
-    const [soloStats] = useAtom(a_solo_stats);
+    const [stats] = useAtom(a_stats);
     const { str } = useLang();
 
-    const { plays, total_points, best_points } = soloStats;
+    const { plays, total_points, best_points } = stats;
     const ave = plays ? Math.round(total_points / plays) : 0;
     const best = plays ? best_points : 0;
 

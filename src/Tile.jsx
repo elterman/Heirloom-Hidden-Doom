@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useAtom } from 'jotai';
 import { useState } from 'react';
-import { a_alert, a_board_size, a_dimension, a_opp_alert, a_over, a_paused, a_points, a_secs, a_selected, a_solo_stats, a_spectator, a_step, a_tap, a_tick_time } from './atoms';
+import { a_alert, a_board_size, a_dimension, a_over, a_paused, a_points, a_secs, a_selected, a_stats, a_step, a_tap, a_tick_time } from './atoms';
 import { _11, COIN, LOST, TILE_SET_SIZE, TRAP, WON } from './const';
 import Coin from './Images/Coin.webp';
 import Trap from './Images/Death.webp';
@@ -20,11 +20,9 @@ const Tile = (props) => {
     const [, setAlert] = useAtom(a_alert);
     const playSound = usePlaySound();
     const [paused] = useAtom(a_paused);
-    const [oppAlert] = useAtom(a_opp_alert);
-    const [stats, setSoloStats] = useAtom(a_solo_stats);
+    const [stats, setStats] = useAtom(a_stats);
     const { onTick } = useGameState();
     const [secs] = useAtom(a_secs);
-    const [spectator] = useAtom(a_spectator);
     const [tap, setTap] = useAtom(a_tap);
     const [tickTime] = useAtom(a_tick_time);
     const [points, setPoints] = useAtom(a_points);
@@ -64,15 +62,13 @@ const Tile = (props) => {
             }, 100);
         }
 
-        if (!spectator) {
-            const { plays, total_points, best_points } = stats;
-            const pnts = over === LOST ? 0 : soloPoints;
+        const { plays, total_points, best_points } = stats;
+        const pnts = over === LOST ? 0 : soloPoints;
 
-            setSoloStats({ plays: plays + 1, total_points: total_points + pnts, best_points: Math.max(best_points, pnts) });
+        setStats({ plays: plays + 1, total_points: total_points + pnts, best_points: Math.max(best_points, pnts) });
 
-            if (best_points > 10 && pnts > best_points) {
-                setAlert({ alert: S_BEST_SCORE });
-            }
+        if (best_points > 10 && pnts > best_points) {
+            setAlert({ alert: S_BEST_SCORE });
         }
     };
 
@@ -128,7 +124,7 @@ const Tile = (props) => {
     const scale = tapped ? 0.7 : 1;
     const animate = { transform: `scale(${scale})` };
     const transition = { duration: 0.1 };
-    const pointerEvents = !spectator && !paused && !oppAlert && !over ? 'auto' : 'none';
+    const pointerEvents = !paused && !over ? 'auto' : 'none';
     const sel = over && selected && samePos(selected, tile);
 
     if (apple) {

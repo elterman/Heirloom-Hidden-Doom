@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { a_over, a_page, a_paused, a_reset_stats, a_secs, a_solo_stats } from './atoms';
+import { a_over, a_page, a_paused, a_reset_stats, a_secs, a_stats } from './atoms';
 import { GAME_PAGE, START_PAGE } from './const';
 import Back from './Images/Back.webp';
 import ResetStats from './Images/Reset Stats.webp';
@@ -10,7 +10,7 @@ const Toolbar = () => {
     const [page, setPage] = useAtom(a_page);
     const [over] = useAtom(a_over);
     const [secs] = useAtom(a_secs);
-    const [soloStats] = useAtom(a_solo_stats);
+    const [stats] = useAtom(a_stats);
     const [, setPaused] = useAtom(a_paused);
     const [, setResetStats] = useAtom(a_reset_stats);
     const playSound = usePlaySound();
@@ -32,7 +32,7 @@ const Toolbar = () => {
         setResetStats(true);
     };
 
-    const plays = soloStats.plays;
+    const plays = stats.plays;
     const onClick = plays > 0 ? onResetStats : null;
 
     return <div className="toolbar">

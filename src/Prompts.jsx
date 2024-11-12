@@ -1,6 +1,6 @@
 import { useAtom } from 'jotai';
 import PromptPanel from './Prompt Panel';
-import { a_alert, a_over, a_paused, a_points, a_reset_stats, a_size, a_solo_stats } from './atoms';
+import { a_alert, a_over, a_paused, a_points, a_reset_stats, a_size, a_stats } from './atoms';
 import { X } from './const';
 import useGameState from './useGameState';
 import useLang, { S_BEST_SCORE, S_PLAY_AGAIN, S_RESET_STATS, S_WAITING_FOR_START } from './useLang';
@@ -10,7 +10,7 @@ import { defer } from './utils';
 const Prompts = () => {
     const [size] = useAtom(a_size);
     const [resetStats, setResetStats] = useAtom(a_reset_stats);
-    const [soloStats] = useAtom(a_solo_stats);
+    const [stats] = useAtom(a_stats);
     const [points] = useAtom(a_points);
     const [alert] = useAtom(a_alert);
     const [over, setOver] = useAtom(a_over);
@@ -18,7 +18,7 @@ const Prompts = () => {
     const playSound = usePlaySound();
     const { onSizeSet } = useGameState();
     const { str } = useLang();
-    const [, setSoloStats] = useAtom(a_solo_stats);
+    const [, setStats] = useAtom(a_stats);
 
     const dismiss = (cancel) => {
         setResetStats(false);
@@ -30,7 +30,7 @@ const Prompts = () => {
         if (op === 1) {
             if (resetStats) {
                 setResetStats(false);
-                setSoloStats(null);
+                setStats(null);
             } else if (over) {
                 defer(() => {
                     setOver(null);
@@ -55,7 +55,7 @@ const Prompts = () => {
 
     const alertButtonStyle = { pointerEvents: 'none', filter: 'saturate(2)' };
     const overPrompt = getOverPrompt();
-    const showBestScore = over && soloStats.best_points > 10 && points >= soloStats.best_points && !alert;
+    const showBestScore = over && stats.best_points > 10 && points >= stats.best_points && !alert;
 
     return <>
         <PromptPanel id='pp-over' labels={[overPrompt]} delay={overPrompt ? 0.5 : 0} onClick={onResponse} show={overPrompt}/>

@@ -48,22 +48,22 @@ export const a_reset_stats = atom(
 );
 
 export const a_best_points = atom(get => {
-    const { plays, best_points } = get(a_solo_stats);
+    const { plays, best_points } = get(a_stats);
     return plays > 1 && get(a_points) === best_points;
 });
 
-const a_solo_stats_base = atom([null, null, null, null, null]);
+const a_stats_base = atom([null, null, null, null, null]);
 
-export const a_solo_stats = atom(
+export const a_stats = atom(
     get => {
         const size = get(a_size);
-        return get(a_solo_stats_base)[size] || { plays: 0, total_points: 0, best_points: 0 };
+        return get(a_stats_base)[size] || { plays: 0, total_points: 0, best_points: 0 };
     },
     (get, set, stats) => {
         const size = get(a_size);
-        const newStats = [...get(a_solo_stats_base)];
+        const newStats = [...get(a_stats_base)];
         newStats[size] = stats;
-        set(a_solo_stats_base, newStats);
+        set(a_stats_base, newStats);
     }
 );
 
