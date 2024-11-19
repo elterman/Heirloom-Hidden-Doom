@@ -2,14 +2,30 @@ import { motion } from 'framer-motion';
 import _ from 'lodash';
 import SvgPromptX from './Svg Prompt X';
 import { X } from './const';
-import { isOnMobile } from './utils';
-import useLang from './useLang';
+import { clientRect, isOnMobile } from './utils';
+import useLang, { S_BEST_SCORE } from './useLang';
 import { useAtom } from 'jotai';
 import { a_size } from './atoms';
+import { useEffect, useState } from 'react';
 
 const PromptPanel = (props) => {
     const { id, labels, onClick, show, style, buttonStyle, pulse, delay = 0 } = props;
     const [size] = useAtom(a_size);
+    const [offset, setOffset] = useState(0);
+
+    useEffect(() => {
+        let off = 0;
+
+        if (show && id === 'pp-alert' && labels[0] === S_BEST_SCORE) {
+            const r1 = clientRect('mid-panel');
+            const r2 = clientRect(id);
+            off = r1.y - r2.y + (r1.height - r2.height) / 2;
+        }
+
+        if (off !== offset) {
+            setOffset(off);
+        }
+    }, [id, labels, offset, show]);
 
     const Button = (props) => {
         const { label, index } = props;
@@ -33,7 +49,7 @@ const PromptPanel = (props) => {
         </motion.div>;
     };
 
-    return <motion.div id={id} className='prompt-panel' animate={{ opacity: show ? 1 : 0, transform: `scale(${show ? 1 : 0})` }}
+    return <motion.div id={id} className='prompt-panel' animate={{ opacity: show ? 1 : 0, transform: `translateY(${offset}px) scale(${show ? 1 : 0})` }}
         transition={{ type: 'spring', damping: 15, delay }} style={{ ...style }}>
         {_.map(labels, (label, i) => <Button key={i} label={label} index={i} />)}
     </motion.div>;

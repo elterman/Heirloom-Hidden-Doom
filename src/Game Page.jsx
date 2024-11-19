@@ -12,7 +12,7 @@ const GamePage = () => {
             <StatsPanel />
             <Scoreboard />
         </div>
-        <div className='mid-panel'>
+        <div id='mid-panel' className='mid-panel'>
             <Board />
             <StartPrompt />
         </div>
